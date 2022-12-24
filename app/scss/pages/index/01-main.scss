@@ -34,6 +34,24 @@
 			background: url('../img/wood.svg') center center / contain no-repeat;
 		}
 	}
+	&__scroll {
+		position: absolute;
+		bottom: 90px;
+		left: 50%;
+		transform: translateX(-50%);
+		z-index: 999;
+		width: 31px;
+		height: 70px;
+		border: 2px solid #ffffff;
+		border-radius: 100px;
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
+		padding: 11px 0;
+		img {
+			animation: slide-bottom 1s ease-in-out infinite alternate forwards;
+		}
+	}
 	&__content {
 		position: relative;
 		z-index: 1;
@@ -69,6 +87,15 @@
 		&.doctor {
 			left: 68%;
 		}
+	}
+}
+
+@keyframes slide-bottom {
+	0% {
+		transform: translateY(0);
+	}
+	100% {
+		transform: translateY(100%);
 	}
 }
 
@@ -129,6 +156,9 @@
 				height: 322px;
 				width: 175px;
 			}
+		}
+		&__scroll {
+			display: none;
 		}
 		&__content {
 			height: 100%;
