@@ -204,6 +204,7 @@
 }
 @include media-mobile-horizontal {
 	.header-menu {
+		width: 100%;
 		&__container {
 			justify-content: center;
 			align-items: center;

@@ -30,6 +30,21 @@
 	border-radius: 25px;
 	transform: translateY(300px);
 	transition: all 0.5s ease;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	@include media-mobile-horizontal {
+		bottom: 20px;
+		right: 20px;
+	}
+	&::after {
+		content: '';
+		display: block;
+		width: 28px;
+		height: 28px;
+		background: url('../img/arrow.svg') center center / contain no-repeat;
+		transform: rotate(-180deg);
+	}
 	&:hover {
 		background: darken($color: #0d4862, $amount: 10);
 	}
@@ -38,8 +53,5 @@
 	}
 	&._fixed {
 		transform: translateY(0);
-	}
-	img {
-		transform: rotate(-180deg);
 	}
 }

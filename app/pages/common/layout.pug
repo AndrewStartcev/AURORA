@@ -6,8 +6,9 @@ html(lang="ru")
     title АВРОРА - Пансионат премиум-класса в Новосибирске
     link(rel="shortcut icon", href="favicon.ico", type="image/x-icon")
 
+    link(rel="stylesheet", href="https://unpkg.com/aos@2.3.1/dist/aos.css")
     link(rel="stylesheet", href="https://unpkg.com/swiper@8/swiper-bundle.min.css")
-    link(rel="stylesheet", href="assets/css/style.min.css")
+    link(rel="stylesheet", href="assets/css/style.min.css?ver=1.2")
   body#top
     .page
       block header
@@ -15,12 +16,11 @@ html(lang="ru")
       block content
       block footer
         include footer
-      button(data-goto=".main").btn-scroll
-        img(src="assets/img/arrow.svg", alt="")
-
+      button(data-goto=".content").btn-scroll
       block popup
         include popup
       block script
-        script(src="https://code.jquery.com/jquery-3.6.0.min.js")
+        script(src="https://unpkg.com/aos@2.3.1/dist/aos.js")
+        <script>AOS.init({disable: 'tablet'});</script>
         script(src="https://unpkg.com/swiper@8/swiper-bundle.min.js")
-        script(src="assets/js/main.min.js")
+        script(src="assets/js/main.min.js?ver=1.2")

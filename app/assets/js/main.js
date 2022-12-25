@@ -50,6 +50,95 @@ window.addEventListener('scroll', function (e) {
   }
 })
 
+/*   =================== Popup  =================== */
+const popupLinks = document.querySelectorAll("[data-popup]");
+const popupLinksClose = document.querySelectorAll(".popup__close");
+
+const popupLinksID = document.querySelectorAll("[data-popup-id]");
+const popupLinksImage = document.querySelectorAll("[data-popup-image]");
+
+if (popupLinksImage) {
+  popupLinksImage.forEach(elem => {
+    elem.addEventListener("click", function (e) {
+      removeActiveClassesParent(popupLinksImage, "_active");
+      elem.parentElement.classList.add("_active");
+      let ifreameHtml = e.target.getAttribute("data-image")
+      document.querySelector('.popup .image__body').innerHTML = `<img src="${ifreameHtml}" alt="">`
+
+
+      let delay = 500;
+      let unlock = true;
+      const targetBlockElement = document.querySelector('#imagePopup');
+      if (targetBlockElement) {
+        targetBlockElement.classList.add('show')
+        bodyLock(unlock, false, delay);
+      } else {
+        console.log(`[popupBlock]:  Нет модального окна на странице: ${targetBlock}`);
+      }
+    });
+  });
+}
+
+if (popupLinksID) {
+  popupLinksID.forEach(elem => {
+    elem.addEventListener("click", function (e) {
+      removeActiveClassesParent(popupLinksID, "_active");
+      elem.parentElement.classList.add("_active");
+      let ifreameHtml = document.querySelector('.feedbacks-video._active .feedbacks-video-code').innerHTML
+      document.querySelector('.popup .video__body').innerHTML = ifreameHtml
+
+
+      let delay = 500;
+      let unlock = true;
+      const targetBlockElement = document.querySelector('#videoPopup');
+      if (targetBlockElement) {
+        targetBlockElement.classList.add('show')
+        bodyLock(unlock, false, delay);
+      } else {
+        console.log(`[popupBlock]:  Нет модального окна на странице: ${targetBlock}`);
+      }
+    });
+  });
+}
+function removeActiveClassesParent(array, className) {
+  for (let i = 0; i < array.length; i++) {
+    array[i].parentElement.classList.remove(className);
+  }
+}
+
+if (popupLinks) {
+  popupLinks.forEach(elem => {
+    elem.addEventListener("click", popupBlock);
+  });
+}
+
+if (popupLinksClose) {
+  let delay = 500;
+  let unlock = true;
+  popupLinksClose.forEach(elem => {
+    elem.addEventListener("click", function () {
+      bodyUnLock(unlock, false, delay);
+      elem.closest('.popup').classList.remove('show')
+    });
+  });
+}
+
+function popupBlock(e) {
+  let delay = 500;
+  let unlock = true;
+  const targetBlock = e.target.getAttribute("data-popup");
+  const targetBlockElement = document.querySelector(targetBlock);
+  removeActiveClasses(popupLinks, "_active");
+  e.target.classList.add("_active");
+  if (targetBlockElement) {
+    targetBlockElement.classList.add('show')
+    bodyLock(unlock, false, delay);
+    document.documentElement.classList.add("_popup-open");
+  } else {
+    console.log(`[popupBlock]:  Нет модального окна на странице: ${targetBlock}`);
+  }
+};
+
 /*   =================== Плавная прокрутка к блоку  =================== */
 const menuLinks = document.querySelectorAll("[data-goto]");
 if (menuLinks) {
@@ -65,9 +154,6 @@ function gotoBlock(e) {
   removeActiveClasses(menuLinks, "_active");
   e.target.classList.add("_active");
   if (targetBlockElement) {
-    // Закрытие открытого меню:
-    document.documentElement.classList.contains("_menu-open") ? menuClose() : null;
-
     // Прокрутка:
     window.scrollTo({
       top: targetBlockElement.getBoundingClientRect().top + window.scrollY,

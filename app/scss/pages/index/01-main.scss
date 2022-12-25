@@ -48,7 +48,12 @@
 		justify-content: center;
 		align-items: flex-start;
 		padding: 11px 0;
-		img {
+		&::after {
+			content: '';
+			display: block;
+			width: 28px;
+			height: 28px;
+			background: url('../img/arrow.svg') center center / contain no-repeat;
 			animation: slide-bottom 1s ease-in-out infinite alternate forwards;
 		}
 	}
@@ -96,7 +101,7 @@
 		transform: translateY(0);
 	}
 	100% {
-		transform: translateY(100%);
+		transform: translateY(80%);
 	}
 }
 
@@ -152,7 +157,7 @@
 			flex: 1 1 auto;
 			position: relative;
 			&::after {
-				bottom: 60px;
+				bottom: 0px;
 				left: -60px;
 				height: 322px;
 				width: 175px;
@@ -195,8 +200,7 @@
 			&.human {
 				height: 207px;
 				width: 191px;
-				left: 50%;
-				transform: translateX(-50%);
+				left: calc(50% - 81px);
 			}
 			&.doctor {
 				display: none;
