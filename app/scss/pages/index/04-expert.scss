@@ -1,0 +1,156 @@
+.expert {
+	padding: 72px 0;
+	background: #d0e7f3;
+	border-radius: 50px;
+	margin: 0 4px;
+}
+
+.expert-head {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	z-index: 1;
+	margin-bottom: 46px;
+	p {
+		margin: 0;
+		font-size: 18px;
+		line-height: 27px;
+		text-align: center;
+		letter-spacing: 1px;
+		text-transform: uppercase;
+		color: #55abca;
+		margin-bottom: 7px;
+	}
+	h2 {
+		margin: 0;
+		max-width: 624px;
+		font-size: 48px;
+		line-height: 60px;
+		text-align: center;
+		text-transform: uppercase;
+		color: #0d4862;
+	}
+}
+
+.expert-slider {
+	overflow: hidden;
+	&__controlles {
+		padding-top: 35px;
+		display: flex;
+		justify-content: flex-end;
+		align-items: stretch;
+		gap: 18px;
+	}
+	&__btn {
+		background: #53a5c3;
+		border-radius: 14px;
+		width: 50px;
+		height: 50px;
+		transition: all 0.5s ease;
+		path {
+			fill: #fff;
+		}
+		&:hover {
+			background: darken($color: #53a5c3, $amount: 10);
+		}
+		&:active {
+			transform: scale(0.95);
+		}
+		&.swiper-button-disabled {
+			background: #d8d8d8;
+			path {
+				fill: #939393;
+			}
+		}
+
+		&--prev {
+			transform: rotate(180deg);
+			&:active {
+				transform: rotate(180deg) scale(0.95);
+			}
+		}
+	}
+}
+.expert-item {
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 20px;
+	&__photo {
+		flex: 0 0 auto;
+		img {
+			width: 280px;
+			height: 280px;
+			object-fit: cover;
+			border-radius: 40px;
+		}
+	}
+	.name {
+		margin: 0;
+		font-weight: 500;
+		font-size: 24px;
+		line-height: 36px;
+		color: #0d4862;
+		margin-bottom: 12px;
+	}
+	.rank {
+		font-family: 'Roboto', sans-serif;
+		margin: 0;
+		margin-bottom: 12px;
+		font-size: 16px;
+		line-height: 24px;
+		color: #718b99;
+	}
+	.descr {
+		font-family: 'Roboto', sans-serif;
+		margin: 0;
+		font-size: 16px;
+		line-height: 24px;
+		color: #0d4862;
+	}
+}
+
+@include media-tablet-horizontal {
+	.expert-item {
+		flex-direction: column;
+		&__photo {
+			flex: 1 1 auto;
+			img {
+				width: 100%;
+				height: auto;
+			}
+		}
+	}
+}
+
+@include media-mobile-horizontal {
+	.expert {
+		padding: 60px 0;
+		border-radius: 24px;
+	}
+	.expert-head {
+		p {
+			font-size: 12px;
+			margin-bottom: 7px;
+		}
+		h2 {
+			font-size: 24px;
+			line-height: 29px;
+		}
+	}
+	.expert-slider {
+		display: flex;
+		flex-direction: column-reverse;
+		&__controlles {
+			padding-top: 0px;
+			padding-bottom: 12px;
+			display: flex;
+			justify-content: center;
+		}
+	}
+	.expert-item {
+		text-align: center;
+	}
+}

@@ -14,9 +14,9 @@
 		content: '';
 		display: block;
 		position: absolute;
-		bottom: 0;
+		bottom: -55px;
 		left: 55%;
-		height: 800px;
+		height: 750px;
 		width: 1400px;
 		background: url('../img/building.svg') center center / contain no-repeat;
 	}
@@ -64,6 +64,7 @@
 			margin-bottom: 24px;
 		}
 		ul {
+			font-family: 'Roboto', sans-serif;
 			margin: 0;
 			li {
 				font-weight: 400;

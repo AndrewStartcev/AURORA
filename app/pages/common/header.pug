@@ -1,1 +1,26 @@
-header.header#header
+header.header
+  .container
+    a.header-logo(href="#")
+      img(src="assets/img/logo.svg", alt="Аврора")
+      span Аврора
+    .header-menu
+      ul.header-menu__container
+        li.header-menu__item._current-page
+          a(href="#") Главная
+        li.header-menu__item
+          a(href="#") Стоимость
+        li.header-menu__item
+          a(href="#") Галерея
+        li.header-menu__item
+          a(href="#") Заселение
+        li.header-menu__item
+          a(href="#") Статьи
+        li.header-menu__item
+          a(href="#") Контакты
+
+    a(href="tel:+73832345678").header-tel
+      span  +7 (383) 234-56-78
+    button.header-burger
+      span
+      span
+      span

@@ -1,0 +1,138 @@
+.plan {
+	padding: 60px 0 116px;
+	background: #d0e7f3;
+	border-radius: 50px;
+	margin: 0 4px;
+	margin-top: 40px;
+}
+
+.plan-head {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	z-index: 1;
+	margin-bottom: 46px;
+	p {
+		margin: 0;
+		font-size: 18px;
+		line-height: 27px;
+		text-align: center;
+		letter-spacing: 1px;
+		text-transform: uppercase;
+		color: #55abca;
+		margin-bottom: 7px;
+	}
+	h2 {
+		margin: 0;
+		font-size: 48px;
+		line-height: 60px;
+		text-align: center;
+		text-transform: uppercase;
+		color: #0d4862;
+	}
+}
+.plan-item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 100px;
+	&:last-child {
+		margin-bottom: 0;
+	}
+	&:nth-child(2n) {
+		flex-direction: row-reverse;
+	}
+	&__content {
+		flex: 0 0 557px;
+		h3 {
+			width: 90%;
+			margin: 0;
+			font-weight: 700;
+			font-size: 32px;
+			line-height: 40px;
+			color: #0d4862;
+			margin-bottom: 24px;
+		}
+		ul {
+			margin: 0;
+			padding: 0;
+			list-style-type: none;
+			font-family: 'Roboto', sans-serif;
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			gap: 24px;
+			li {
+				display: flex;
+				justify-content: flex-start;
+				align-items: flex-start;
+				gap: 12px;
+				font-size: 18px;
+				line-height: 24px;
+				color: #333333;
+				&::before {
+					content: '';
+					display: block;
+					flex: 0 0 24px;
+					width: 24px;
+					height: 24px;
+					background: url('../img/check-list.svg') center center / contain no-repeat;
+				}
+			}
+		}
+	}
+	&__image {
+		h3 {
+			display: none;
+		}
+	}
+}
+@include media-mobile-horizontal {
+	.plan {
+		padding: 40px 0;
+		border-radius: 24px;
+	}
+	.plan-head {
+		p {
+			font-size: 12px;
+			margin-bottom: 7px;
+		}
+		h2 {
+			font-size: 24px;
+			line-height: 29px;
+		}
+	}
+	.plan-item {
+		flex-direction: column-reverse;
+		gap: 24px;
+		margin-bottom: 60px;
+		&:last-child {
+			margin-bottom: 0;
+		}
+		&:nth-child(2n) {
+			flex-direction: column-reverse;
+		}
+		&__content {
+			flex: 0 0 auto;
+			h3 {
+				display: none;
+			}
+		}
+		&__image {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+			h3 {
+				display: block;
+				color: #0d4862;
+				font-size: 20px;
+				line-height: 1.2;
+				margin-bottom: 24px;
+			}
+		}
+	}
+}

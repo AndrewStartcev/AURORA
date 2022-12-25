@@ -1,129 +1,324 @@
-$(document).ready(() => {
-  // ======== Всплывающее окно по data-popup ===============
-  //? Пример Кнопки: <button data-popup="#mainForm">...</button>
-  $('[data-popup]').on('click', function (e) {
-    $('.popup').removeClass('show');
-    let popupId = $(this).attr('data-popup');
-    if ($(this).is('[data-theme]')) {
-      let popupTheme = $(this).attr('data-theme');
-      $(popupId + ' input[name="theme"]').val(popupTheme)
-    }
-    if (popupId == '#video') {
-      createLinkVideo($(this).attr('data-link'))
-    }
-    $(popupId).addClass('show');
-    $('html').addClass('lock');
+/*==========================================================================================================================================================================*/
+/* Menu Burger */
+if (document.querySelector(".header-burger")) {
+  let delay = 500;
+  let unlock = true;
+  let menuBody = document.querySelector(".header-menu");
+  let iconMenu = document.querySelector(".header-burger");
 
-  });
-  // Закрываем окно при нажатии на кнопку
-  $('.popup__close, .popup-close').on('click', function () {
-    $('.popup').removeClass('show');
-    $('html').removeClass('lock');
-  });
-  // Закрываем окно при клики за пределами окна
-  $(document).on("mouseup", function (e) {
-    var div = $(".popup__body");
-    if (!div.is(e.target) && div.has(e.target).length === 0) {
-      $('.popup').removeClass('show');
-      $('html').removeClass('lock');
-    }
-  });
-
-  // ======== Добавление класс по скроллу ===============
-  scrollHeader()
-  $(window).scroll(scrollHeader);
-  function scrollHeader() {
-    var height = $(window).scrollTop();
-    if (height > 50) {
-      $('header').addClass('header-bg');
+  iconMenu.addEventListener("click", function (e) {
+    if (document.documentElement.classList.contains("_menu-open")) {
+      bodyUnLock(unlock, false, delay);
+      menuClose(menuBody, iconMenu);
     } else {
-      $('header').removeClass('header-bg');
+      bodyLock(unlock, false, delay);
+      menuOpen(menuBody, iconMenu);
     }
+  });
+};
+
+
+function menuOpen(menuBody, iconMenu) {
+  document.documentElement.classList.add("_menu-open");
+  menuBody.classList.add("_open");
+  iconMenu.classList.add("_close");
+}
+
+function menuClose(menuBody, iconMenu) {
+  document.documentElement.classList.remove("_menu-open");
+  menuBody.classList.remove("_open");
+  iconMenu.classList.remove("_close");
+}
+
+/*  =================== Fsixed Header ======================= */
+const header = document.querySelector(".header");
+const btnScroll = document.querySelector('.btn-scroll')
+let scrollPrev = 0;
+
+window.addEventListener('scroll', function (e) {
+  let scrolled = window.pageYOffset;
+
+  if (scrolled > 100 && scrolled > scrollPrev) {
+    header.classList.add('_fixed');
+  } else {
+    header.classList.remove('_fixed');
   }
+  if (scrolled > 200 && scrolled > scrollPrev) {
+    btnScroll.classList.add('_fixed');
+  } else {
+    btnScroll.classList.remove('_fixed');
+  }
+})
 
-  // ======== Плавный скролл по якорям ===============
-  $('a[href^="#"]').on('click', function () {
-    let href = $(this).attr('href');
+/*   =================== Плавная прокрутка к блоку  =================== */
+const menuLinks = document.querySelectorAll("[data-goto]");
+if (menuLinks) {
+  menuLinks.forEach(elem => {
+    elem.addEventListener("click", gotoBlock);
+  });
+}
 
-    $('html, body').animate({
-      scrollTop: $(href).offset().top
-    }, {
-      duration: 500,   // по умолчанию «400»
-      easing: "swing" // по умолчанию «swing»
+
+function gotoBlock(e) {
+  const targetBlock = e.target.getAttribute("data-goto");
+  const targetBlockElement = document.querySelector(targetBlock);
+  removeActiveClasses(menuLinks, "_active");
+  e.target.classList.add("_active");
+  if (targetBlockElement) {
+    // Закрытие открытого меню:
+    document.documentElement.classList.contains("_menu-open") ? menuClose() : null;
+
+    // Прокрутка:
+    window.scrollTo({
+      top: targetBlockElement.getBoundingClientRect().top + window.scrollY,
+      behavior: "smooth",
     });
+    e.preventDefault();
+  } else {
+    console.log(`[gotoBlock]: Такого блока нет на странице: ${targetBlock}`);
+  }
+};
 
-    return false;
+
+function removeActiveClasses(array, className) {
+  for (let i = 0; i < array.length; i++) {
+    array[i].classList.remove(className);
+  }
+}
+/*==========================================================================================================================================================================*/
+/* Скрытие, блокировка и разблокировка скролла */
+function bodyLock(unlock, lockPadding, delay = 500) {
+  const lockPaddingValue = window.innerWidth - document.querySelector(".page").offsetWidth + "px";
+  if (lockPadding.length > 0) {
+    for (let index = 0; index < lockPadding.length; index++) {
+      const elem = lockPadding[index];
+      elem.style.paddingRight = lockPaddingValue;
+    }
+  }
+  document.body.style.paddingRight = lockPaddingValue;
+  document.body.classList.add("_lock");
+  unlock = false;
+  setTimeout(function () {
+    unlock = true;
+  }, delay);
+}
+
+
+function bodyUnLock(unlock, lockPadding, delay = 500) {
+  setTimeout(function () {
+    if (lockPadding.length > 0) {
+      for (let index = 0; index < lockPadding.length; index++) {
+        const elem = lockPadding[index];
+        elem.style.paddingRight = "0px";
+      }
+    }
+    document.body.style.paddingRight = "0px";
+    document.body.classList.remove("_lock");
+  }, delay);
+  unlock = false;
+  setTimeout(function () {
+    unlock = true;
+  }, delay);
+}
+
+// Slider. Специалисты:
+if (document.querySelector(".expert-slider")) {
+  new Swiper(".expert-slider", {
+    observer: true,
+    observeParents: true,
+    watchOverflow: true,
+    slidesPerView: 1,
+    spaceBetween: 20,
+    speed: 1000,
+    breakpoints: {
+      619: {
+        slidesPerView: 2
+      },
+    },
+    keyboard: {
+      enabled: true,
+      onlyInViewport: true,
+      pageUpDown: true,
+    },
+    navigation: {
+      nextEl: '.expert-slider__btn--next',
+      prevEl: '.expert-slider__btn--prev',
+    },
   });
-});
+}
+// Slider. Видео-отзывы:
+if (document.querySelector("._slider-video")) {
+  new Swiper("._slider-video", {
+    observer: true,
+    observeParents: true,
+    watchOverflow: true,
+    slidesPerView: 1,
+    spaceBetween: 38,
+    speed: 1000,
+    breakpoints: {
+      619: {
+        slidesPerView: 2
+      },
+      1024: {
+        slidesPerView: 3
+      },
+    },
+    keyboard: {
+      enabled: true,
+      onlyInViewport: true,
+      pageUpDown: true,
+    },
+    navigation: {
+      nextEl: '.video-slider__btn--next',
+      prevEl: '.video-slider__btn--prev',
+    },
+  });
+}
+// Slider. Видео-отзывы:
+if (document.querySelector("._slider-text")) {
+  new Swiper("._slider-text", {
+    observer: true,
+    observeParents: true,
+    watchOverflow: true,
+    slidesPerView: 1,
+    spaceBetween: 70,
+    speed: 1000,
+    breakpoints: {
+      619: {
+        slidesPerView: 2
+      },
+    },
+    keyboard: {
+      enabled: true,
+      onlyInViewport: true,
+      pageUpDown: true,
+    },
+    navigation: {
+      nextEl: '.text-slider__btn--next',
+      prevEl: '.text-slider__btn--prev',
+    },
+  });
+}
 
-// ======== Маска для телефона ===============
-document.addEventListener("DOMContentLoaded", function () {
-  var phoneInputs = document.querySelectorAll('input[type="tel"]');
+/*==========================================================================================================================================================================*/
+/* Маска для телефона */
+function validatePhone() {
+  let phoneInputs = document.querySelectorAll("._tel");
+  [].forEach.call(document.querySelectorAll("._tel"), function (input) {
+    let keyCode;
 
-  var getInputNumbersValue = function (input) {
-    return input.value.replace(/\D/g, '');
-  }
 
-  var onPhonePaste = function (e) {
-    var input = e.target,
-      inputNumbersValue = getInputNumbersValue(input);
-    var pasted = e.clipboardData || window.clipboardData;
-    if (pasted) {
-      var pastedText = pasted.getData('Text');
-      if (/\D/g.test(pastedText)) {
-        input.value = inputNumbersValue;
-        return;
+    function mask(event) {
+      event.keyCode && (keyCode = event.keyCode);
+      let pos = this.selectionStart;
+      if (pos < 3) event.preventDefault();
+      let matrix = "+7 (___) ___ ____";
+      let i = 0;
+      let def = matrix.replace(/\D/g, "");
+      let val = this.value.replace(/\D/g, "");
+      let new_value = matrix.replace(/[_\d]/g, function (a) {
+        return i < val.length ? val.charAt(i++) || def.charAt(i) : a
+      });
+      i = new_value.indexOf("_");
+      if (i != -1) {
+        i < 5 && (i = 3);
+        new_value = new_value.slice(0, i);
       }
+      let reg = matrix.substr(0, this.value.length).replace(/_+/g, function (a) {
+        return "\\d{1," + a.length + "}"
+      }).replace(/[+()]/g, "\\$&");
+      reg = new RegExp("^" + reg + "$");
+      if (!reg.test(this.value) || this.value.length < 5 || keyCode > 47 && keyCode < 58) this.value = new_value;
+      if (event.type == "blur" && this.value.length < 5) this.value = "";
     }
-  }
 
-  var onPhoneInput = function (e) {
-    var input = e.target,
-      inputNumbersValue = getInputNumbersValue(input),
-      selectionStart = input.selectionStart,
-      formattedInputValue = "";
 
-    if (!inputNumbersValue) {
-      return input.value = "";
-    }
+    input.addEventListener("input", mask, false);
+    input.addEventListener("focus", mask, false);
+    input.addEventListener("blur", mask, false);
+    input.addEventListener("keydown", mask, false);
+  });
+};
+validatePhone();
 
-    if (input.value.length != selectionStart) {
-      if (e.data && /\D/g.test(e.data)) {
-        input.value = inputNumbersValue;
-      }
-      return;
-    }
+/*==========================================================================================================================================================================*/
+/* Валидация Формы */
+let forms = document.querySelectorAll("._form");
+let form;
+for (let i = 0; i < forms.length; i++) {
+  form = forms[i];
+  form.addEventListener("submit", formSend);
+}
 
-    if (["7", "8", "9"].indexOf(inputNumbersValue[0]) > -1) {
-      if (inputNumbersValue[0] == "9") inputNumbersValue = "7" + inputNumbersValue;
-      var firstSymbols = (inputNumbersValue[0] == "8") ? "8" : "+7";
-      formattedInputValue = input.value = firstSymbols + " ";
-      if (inputNumbersValue.length > 1) {
-        formattedInputValue += '(' + inputNumbersValue.substring(1, 4);
-      }
-      if (inputNumbersValue.length >= 5) {
-        formattedInputValue += ') ' + inputNumbersValue.substring(4, 7);
-      }
-      if (inputNumbersValue.length >= 8) {
-        formattedInputValue += '-' + inputNumbersValue.substring(7, 9);
-      }
-      if (inputNumbersValue.length >= 10) {
-        formattedInputValue += '-' + inputNumbersValue.substring(9, 11);
-      }
+
+// Функция проверки и обработки результатов валидации формы:
+async function formSend(e) {
+  e.preventDefault();
+  let error = formValidate(form);
+  let formData = new FormData(form);
+  if (error === 0) {
+    inputRemoveError();
+    document.querySelector('.req-form').classList.remove('_error')
+    let response = await fetch("form.php", {
+      method: "POST",
+      body: formData
+    });
+    if (response.ok) {
+      let result = await response.json();
+      alert(result.message);
+      formPreview.innerHTML = "";
+      form.reset();
+      // document.querySelector(".popup-message").classList.add("_show");
+      // let buttonPopup = document.querySelector(".popup-message__button");
+      // buttonPopup.addEventListener("click", function (e) {
+      //   this.closest(".popup-message").classList.remove("_show");
+      // });
     } else {
-      formattedInputValue = '+' + inputNumbersValue.substring(0, 16);
+      if (form.classList.contains("form__body")) {
+        document.querySelector(".input").classList.remove("_error");
+      } else {
+        document.querySelector(".input").classList.remove("_error");
+      }
+      alert("Ошибка отправки");
     }
-    input.value = formattedInputValue;
+  } else {
+    document.querySelector('.req-form').classList.add('_error')
   }
-  var onPhoneKeyDown = function (e) {
-    var inputValue = e.target.value.replace(/\D/g, '');
-    if (e.keyCode == 8 && inputValue.length == 1) {
-      e.target.value = "";
+}
+
+// Функция валидации формы:
+function formValidate(form) {
+  let error = 0;
+  let formReq = document.querySelectorAll("._req");
+  for (let index = 0; index < formReq.length; index++) {
+    const input = formReq[index];
+    formRemoveError(input);
+    if (input.classList.contains("_tel")) {
+      console.log(input.value.length);
+      if (input.value.length !== 17) {
+        formAddError(input);
+        error++;
+      }
+    }
+    if (input.value === "") {
+      formAddError(input);
+      error++;
+    }
+    if (input.getAttribute("type") === "checkbox" && input.checked === false) {
+      formAddError(input);
+      error++;
     }
   }
-  for (var phoneInput of phoneInputs) {
-    phoneInput.addEventListener('keydown', onPhoneKeyDown);
-    phoneInput.addEventListener('input', onPhoneInput, false);
-    phoneInput.addEventListener('paste', onPhonePaste, false);
-  }
-});
+  return error;
+}
+
+// Функция добавления полю ввода и его родителю класса "_error" (ошибка):
+function formAddError(input) {
+  input.parentElement.classList.add("_error");
+  input.classList.add("_error");
+}
+// Функция удаления у поля ввода и его родителя класса "_error" (ошибка):
+function formRemoveError(input) {
+  input.parentElement.classList.remove("_error");
+  input.classList.remove("_error");
+}

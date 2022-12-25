@@ -1,5 +1,5 @@
 @import '../../../gulp/node_modules/normalize.css/normalize';
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Roboto:wght@400;700&display=swap');
 
 *,
 *::before,
@@ -25,6 +25,7 @@ a {
 }
 a,
 button {
+	background: transparent;
 	cursor: pointer;
 	color: inherit;
 	border: none;
@@ -62,14 +63,6 @@ textarea {
 	font-weight: 400;
 	font-size: 18px;
 	line-height: 140%;
-	&::placeholder {
-		color: rgba(248, 227, 252, 0.3);
-	}
-	&:focus,
-	&:active {
-		outline: none;
-		border: 1px solid #c41de5;
-	}
 	@include media-mobile {
 		font-size: 16px;
 		padding: 14px 18px;
@@ -97,7 +90,7 @@ input[type='submit'] {
 	min-height: 100vh;
 	overflow-x: hidden;
 }
-.lock {
+._lock {
 	overflow: hidden;
 }
 .content {

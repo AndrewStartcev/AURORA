@@ -1,10 +1,27 @@
-.popup#mainForm
+.popup.show#mainForm
   .popup__content
     .popup__body
       button.popup__close
-      h2.popup__title
-      p.popup__text
-      .popup__form
+      h2.popup__title Обратная Связь
+      p.popup__text Заполните форму ниже и наши сотрудники свяжутся с вами
+      form.popup__form._form
+        .input-group
+          .input
+            input#name._req(type="text" placholder="")
+            label(for="name")
+              span Имя
+          span.error Поле обязательно к заполнению
+        .input-group
+          .input
+            input._tel._req#tel(type="tel" placholder="")
+            label(for="tel")
+              span Номер телефона
+          span.error Не верный формат телефона
+        p.info-form Нажимая кнопку «Отправить», я даю свое согласие на обработку моих персональных данных, в соответствии с Федеральным законом от 27.07.2006 года №152-ФЗ «О персональных данных», на условиях и для целей, определенных в Согласии на обработку персональных данных *
+        button.btn.form-btn(type="submit") Отправить
+        p.req-form Пожалуйста, заполните все обязательные поля
+
+
 
 .popup#successForm
   .popup__content
