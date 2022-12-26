@@ -4,10 +4,11 @@
 	top: 0;
 	left: 0;
 	width: 100%;
-	z-index: 555;
+	z-index: 9999;
 	color: #ffffff;
 	border-bottom: 1px solid #5cbee1;
 	transition: all 0.5s ease;
+
 	&._fixed {
 		padding: 10px 0;
 		background: #55abca;
@@ -115,12 +116,15 @@
 		background: #55abca;
 	}
 	.header-tel {
-		width: 70%;
+		width: auto;
+		display: flex;
 		justify-content: center;
 		flex: 0 0 auto;
 		top: calc(100% + 5px);
+		position: absolute;
 		left: 50%;
 		right: auto;
+		margin: 0 auto;
 		transform: translateX(-50%);
 	}
 	.header-burger {
