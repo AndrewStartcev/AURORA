@@ -1,0 +1,122 @@
+.prices {
+    background-color: #D0E7F3;
+	&__body { 
+        padding: 207px 0px 80px;
+        @include media-tablet-horizontal {
+            padding: 180px 0 60px;
+        }
+        @include media-tablet {
+            padding: 160px 0 40px;
+        }
+    }
+
+	&__content {
+        display: grid;
+        grid-template-columns: minmax(200px, 600px) minmax(200px, 493px);
+        column-gap: 80px;
+        row-gap: 30px;
+        @include media-tablet-horizontal {
+            column-gap: 50px;
+        }
+        @include media-mobile-horizontal {
+            column-gap: 35px;
+        }
+        @media (max-width: 600px) {
+            grid-template-columns: 1fr;
+        }
+    }
+}
+
+.categories-prices {
+	&__item {
+        padding: 16px 24px;
+        background: #55ABCA;
+        border-radius: 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        @media (max-width: 600px) {
+            align-items: flex-start;
+        }
+    }
+
+    &__item:not(:last-child) {
+        margin: 0px 0px 40px 0px;
+        @include media-tablet {
+            margin: 0px 0px 20px 0px;
+        }
+    }
+
+	&__title { 
+        margin: 0px 0px 10px 0px;
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 1.47;
+        color: #FFFFFF;
+    }
+
+	&__text { 
+        margin: 0px 0px 10px 0px;
+        font-family: "Roboto";
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 1.15;
+        color: #0D4862;
+        text-align: right;
+        @include media-tablet {
+            font-size: 16px;
+        }
+        @media (max-width: 600px) {
+            text-align: left;
+        }
+    }
+
+	&__price { 
+        font-size: 32px;
+        font-weight: 400;
+        line-height: 1.47;
+        color: #FFFFFF;
+    }
+}
+
+.info-prices {
+	&__label { 
+        margin: 0px 0px 24px 0px;
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 1.25;
+        color: #0D4862;
+        @include media-tablet {
+            margin: 0px 0px 15px 0px;
+            font-size: 26px;
+        }
+    }
+
+	&__item:not(:last-child) {
+        margin: 0px 0px 14px 0px;
+    }
+
+	&__title {
+        margin: 0px 0px 2px 0px;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 1.66;
+        color: #0D4862;
+        @include media-tablet {
+            margin: 0px 0px 6px 0px;
+            font-size: 22px;
+            line-height: 1.22;
+        }
+    }
+
+	&__text { 
+        font-family: "Roboto";
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 1.5;
+        color: #0D4862;
+        @include media-tablet {
+            font-size: 15px;
+        }
+    }
+}

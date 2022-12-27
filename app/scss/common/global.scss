@@ -4,6 +4,8 @@
 *,
 *::before,
 *::after {
+    margin: 0;
+    padding: 0;
 	box-sizing: inherit;
 }
 
@@ -20,8 +22,6 @@ img {
 a {
 	text-decoration: none;
 	transition: all 0.3s ease;
-	&:hover {
-	}
 }
 a,
 button {
@@ -42,6 +42,10 @@ section {
 	@include media-tablet {
 		padding: 80px 0;
 	}
+}
+
+ul li {
+    list-style: none;
 }
 
 form {
@@ -112,4 +116,23 @@ input[type='submit'] {
 	@include media-tablet {
 		padding: 0px 10px;
 	}
+}
+
+._title {
+    display: block;
+    margin: 0px 0px 40px 0px;
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 1.48;
+    text-transform: uppercase;
+    color: #0D4862;
+    @include media-tablet-horizontal {
+        margin: 0px 0px 20px 0px;
+    }
+    @include media-mobile-horizontal {
+        font-size: 38px;
+    }
+    @include media-mobile {
+        font-size: 30px;
+    }
 }

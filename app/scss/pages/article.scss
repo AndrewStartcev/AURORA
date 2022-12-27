@@ -1,0 +1,81 @@
+.article {
+    background-color: #D0E7F3;
+	&__body { 
+        padding: 167px 0px 80px;
+        @include media-tablet-horizontal {
+            padding: 140px 0 60px;
+        }
+        @include media-tablet {
+            padding: 120px 0 40px;
+        }
+    }
+
+    &__image {
+        position: relative;
+        max-width: 860px;
+        padding: 0px 0px 46.512% 0px;
+        border-radius: 16px;
+        overflow: hidden;
+        @include media-mobile-horizontal {
+            padding: 0px 0px 60% 0px;
+        }
+        & img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &__content {
+        max-width: 860px;
+        margin: 0px auto;
+        & h1 {
+            margin: 19px 0px;
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.48;
+            text-transform: uppercase;
+            color: #0D4862;
+            @include media-tablet {
+                font-size: 38px;
+            }
+            @include media-mobile-horizontal {
+                margin: 14px 0px 5px;
+            }
+            @include media-mobile {
+                font-size: 30px;
+            }
+        }
+    
+        & small {
+            display: inline-block;
+            margin: 0px 0px 19px 0px;
+            font-family: "Roboto";
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 1.15;
+            color: #55ABCA;
+            @include media-mobile-horizontal {
+                font-size: 16px;
+                margin: 0px 0px 15px 0px;
+            }
+        }
+    
+        & p {
+            font-family: "Roboto";
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 1.5;
+            color: #0D4862;
+            @include media-mobile {
+                font-size: 16px;
+            }
+           &:not(:last-child) {
+                margin: 0px 0px 20px 0px;
+           } 
+        }
+    }
+}

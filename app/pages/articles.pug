@@ -1,0 +1,49 @@
+extends common/articles
+
+block articles
+    main.content 
+        .articles
+            .container 
+                .articles__body
+                    h1.articles__title._title(data-aos="fade-right") Статьи
+                    .articles__content.content-articles
+                        .content-articles__article.article-new
+                            .article-new__body 
+                                a.article-new__image(href="article.html" data-aos="fade-right" data-aos-delay="250")
+                                    img(src="assets/img/articles/article-1.png", alt="article-1")
+                                .article-new__content(data-aos="fade-right" data-aos-delay="100")
+                                    a.article-new__title(href="article.html") Название статьи
+                                    .article-new__date 25 марта 2022
+                                    p.article-new__text Разнообразный и богатый опыт реализация намеченных плановых заданий позволяет выполнять важные задания по разработке дальнейших направлений развития. Равным образом консультация с широким активом требуют от нас анализа новых предложений
+                        .content-articles__article.article-new
+                            .article-new__body 
+                                a.article-new__image(href="article.html" data-aos="fade-right" data-aos-delay="350") 
+                                    img(src="assets/img/articles/article-2.png", alt="article-2")
+                                .article-new__content(data-aos="fade-right" data-aos-delay="200")
+                                    a.article-new__title(href="article.html") Название статьи
+                                    .article-new__date 25 марта 2022
+                                    p.article-new__text Разнообразный и богатый опыт реализация намеченных плановых заданий позволяет выполнять важные задания по разработке.
+                        .content-articles__article.article-new
+                            .article-new__body 
+                                a.article-new__image(href="article.html" data-aos="fade-right" data-aos-delay="450") 
+                                    img(src="assets/img/articles/article-3.png", alt="article-3")
+                                .article-new__content(data-aos="fade-right" data-aos-delay="300")
+                                    a.article-new__title(href="article.html") Название статьи
+                                    .article-new__date 25 марта 2022
+                                    p.article-new__text Разнообразный и богатый опыт реализация намеченных плановых заданий позволяет выполнять важные задания по разработке дальнейших направлений развития.
+                    .articles__pagination.pagination-articles(data-aos="fade-up" data-aos-delay="450")
+                        button.pagination-articles__arrow._disabled(disabled type="button")
+                            img(src="assets/img/arrow.svg", alt="arrow")
+                        ul.pagination-articles__list
+                            li.pagination-articles__item 
+                                a.pagination-articles__link._active(href="#") 1
+                            li.pagination-articles__item 
+                                a.pagination-articles__link(href="#") 2
+                            li.pagination-articles__item 
+                                a.pagination-articles__link(href="#") 3
+                            li.pagination-articles__item 
+                                a.pagination-articles__link(href="#") ...
+                            li.pagination-articles__item 
+                                a.pagination-articles__link(href="#") 15
+                        button.pagination-articles__arrow._arrow-right(disabled type="button")
+                            img(src="assets/img/arrow.svg", alt="arrow")

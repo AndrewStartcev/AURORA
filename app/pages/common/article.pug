@@ -3,24 +3,18 @@ html(lang="ru")
     meta(charset="UTF-8")
     meta(http-equiv="X-UA-Compatible", content="IE=edge")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    title АВРОРА - Пансионат премиум-класса в Новосибирске
+    title АВРОРА - Статья
     link(rel="shortcut icon", href="favicon.ico", type="image/x-icon")
-
     link(rel="stylesheet", href="https://unpkg.com/aos@2.3.1/dist/aos.css")
-    link(rel="stylesheet", href="https://unpkg.com/swiper@8/swiper-bundle.min.css")
     link(rel="stylesheet", href="assets/css/style.min.css?ver=1.2")
   body#top
-    .page.page-main
+    .page.page-articles
       block header
         include header
-      block content
+      block article
       block footer
         include footer
-      button(data-goto=".content").btn-scroll
-      block popup
-        include popup
       block script
         script(src="https://unpkg.com/aos@2.3.1/dist/aos.js")
         <script>AOS.init({disable: 'tablet'});</script>
-        script(src="https://unpkg.com/swiper@8/swiper-bundle.min.js")
         script(src="assets/js/main.min.js?ver=1.2")

@@ -25,6 +25,15 @@
 		gap: 30px;
 	}
 }
+
+.page-gallery .header,
+.page-prices .header,
+.page-info .header,
+.page-articles .header,
+.page-article .header {
+    background-color: #55abca;
+}
+
 .header-logo {
 	display: flex;
 	justify-content: flex-start;
@@ -98,16 +107,41 @@
 			left: 0;
 			transition: all 0.5s ease;
 		}
-		&:hover,
-		&._current-page {
-			&::after {
+		&:hover {
+            &::after {
 				width: 33px;
 			}
-		}
+        }
 	}
 }
+
 .header-burger {
 	display: none;
+}
+
+.page-main .header-menu__item[data-menu=main]::after {
+    width: 33px;
+}
+
+.page-gallery .header-menu__item[data-menu=gallery]::after {
+    width: 33px;
+}
+
+.page-prices .header-menu__item[data-menu=prices]::after {
+    width: 33px;
+}
+
+.page-info .header-menu__item[data-menu=info]::after {
+    width: 33px;
+}
+
+.page-contacts .header-menu__item[data-menu=contacts]::after {
+    width: 33px;
+}
+
+.page-articles .header-menu__item[data-menu=articles]::after,
+.page-article .header-menu__item[data-menu=articles]::after {
+    width: 33px;
 }
 
 @include media-tablet {

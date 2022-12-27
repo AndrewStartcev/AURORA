@@ -13,6 +13,8 @@
 
 @import 'common/footer';
 
+@import 'common/breadcrumbs';
+
 // Страницы и блоки
 @import 'pages/index/01-main';
 @import 'pages/index/02-about';
@@ -22,3 +24,10 @@
 @import 'pages/index/06-routine';
 @import 'pages/index/07-feedbacks';
 @import 'pages/index/08-map';
+
+// Страницы:
+@import 'pages/article';
+@import 'pages/articles';
+@import 'pages/gallery';
+@import 'pages/info';
+@import 'pages/prices';

@@ -1,0 +1,41 @@
+.info {
+    background-color: #D0E7F3;
+    &__body { 
+        padding: 207px 0px 80px;
+        @include media-tablet-horizontal {
+            padding: 180px 0 60px;
+        }
+        @include media-tablet {
+            padding: 160px 0 40px;
+        }
+    }
+
+	&__document:not(:last-child) {
+        margin: 0px 0px 24px 0px;
+    }
+}
+
+.document-info {
+	&__link { 
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: start;
+        align-items: center;
+        font-family: "Roboto";
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 1.15;
+        color: #0D4862;
+        &:hover {
+            text-decoration: underline;
+        }
+        @include media-mobile-horizontal {
+            font-size: 16px;
+        }
+        & img {
+            margin: 0px 18px 0px 0px;
+            width: 35px;
+            height: auto;
+        }
+    }
+}

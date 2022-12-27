@@ -1,0 +1,99 @@
+.gallery {
+    background-color: #D0E7F3;
+	&__body {
+        padding: 207px 0px 80px;
+        @include media-tablet-horizontal {
+            padding: 180px 0 60px;
+        }
+        @include media-tablet {
+            padding: 160px 0 40px;
+        }
+    }
+}
+
+.tabs-gallery {
+	&__navigation { 
+        display: grid;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        margin: 0px 0px 40px 0px;
+        @include media-tablet-horizontal {
+            margin: 0px 0px 30px 0px;
+            gap: 15px;
+        }
+        @include media-mobile {
+            margin: 0px 0px 20px 0px;
+        }
+    }
+
+	&__title {
+        flex: 1 1 auto;
+        height: 68px;
+        padding: 0px 30px;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 1.5;
+        background-color: #fff;
+        border-radius: 16px;
+        transition: color 0.3s ease, background-color 0.3s ease;
+        &._tab-active {
+            color: #FFFFFF;
+            background-color: #55ABCA;
+        }
+        @include media-tablet-horizontal {
+            flex: 1 1 31%;
+        }
+        @include media-mobile-horizontal {
+            height: 55px;
+            font-size: 20px;
+        }
+        @include media-mobile {
+            flex: 1 1 100%;
+            height: 45px;
+            font-size: 16px;
+        }
+    }
+
+    &__body {
+        animation: tabs-body_show 0.3s forwards ease-in-out;
+    }
+
+    @keyframes tabs-body_show {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+	&__images {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 24px;
+        @include media-tablet-horizontal {
+            gap: 15px;
+        }
+    }
+
+	&__image {
+        position: relative;
+        border-radius: 16px;
+        overflow: hidden;
+        padding: 0px 0px 79% 0px;
+        & img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        &:hover img {
+            transform: scale(1.1);
+        }
+    } 
+}

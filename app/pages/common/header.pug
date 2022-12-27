@@ -5,18 +5,18 @@ header.header
       span Аврора
     .header-menu
       ul.header-menu__container
-        li.header-menu__item._current-page
-          a(href="#") Главная
-        li.header-menu__item
-          a(href="#") Стоимость
-        li.header-menu__item
-          a(href="#") Галерея
-        li.header-menu__item
-          a(href="#") Заселение
-        li.header-menu__item
-          a(href="#") Статьи
-        li.header-menu__item
-          a(href="#") Контакты
+        li.header-menu__item(data-menu="main")
+          a(href="index.html") Главная
+        li.header-menu__item(data-menu="prices")
+          a(href="prices.html") Стоимость
+        li.header-menu__item(data-menu="gallery")
+          a(href="gallery.html") Галерея
+        li.header-menu__item(data-menu="info")
+          a(href="info.html") Заселение
+        li.header-menu__item(data-menu="articles")
+          a(href="articles.html") Статьи
+        li.header-menu__item(data-menu="contacts")
+          a(href="contacts.html") Контакты
 
     a(href="tel:+73832345678").header-tel
       span  +7 (383) 234-56-78
