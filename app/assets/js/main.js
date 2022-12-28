@@ -34,11 +34,15 @@ function menuClose(menuBody, iconMenu) {
 const header = document.querySelector(".header");
 const btnScroll = document.querySelector('.btn-scroll');
 let scrollPrev = 0;
+if (window.scrollY > 50) {
+    header.classList.add('_fixed');
+} else {
+  header.classList.remove('_fixed');
+}
 
 window.addEventListener('scroll', function (e) {
   let scrolled = window.pageYOffset;
-
-  if (scrolled > 100 && scrolled > scrollPrev) {
+  if (scrolled > 50) {
     header.classList.add('_fixed');
   } else {
     header.classList.remove('_fixed');
@@ -71,7 +75,7 @@ if (popupLinksImage) {
       const targetBlockElement = document.querySelector('#imagePopup');
       if (targetBlockElement) {
         targetBlockElement.classList.add('show')
-        bodyLock(unlock, false, delay);
+        bodyLock(unlock, [header, btnScroll], delay);
       } else {
         console.log(`[popupBlock]:  Нет модального окна на странице: ${targetBlock}`);
       }
@@ -93,7 +97,7 @@ if (popupLinksID) {
       const targetBlockElement = document.querySelector('#videoPopup');
       if (targetBlockElement) {
         targetBlockElement.classList.add('show')
-        bodyLock(unlock, false, delay);
+        bodyLock(unlock, [header, btnScroll], delay);
       } else {
         console.log(`[popupBlock]:  Нет модального окна на странице: ${targetBlock}`);
       }
@@ -117,7 +121,7 @@ if (popupLinksClose) {
   let unlock = true;
   popupLinksClose.forEach(elem => {
     elem.addEventListener("click", function () {
-      bodyUnLock(unlock, false, delay);
+      bodyUnLock(unlock, [header, btnScroll], delay);
       elem.closest('.popup').classList.remove('show')
     });
   });
@@ -132,7 +136,7 @@ function popupBlock(e) {
   e.target.classList.add("_active");
   if (targetBlockElement) {
     targetBlockElement.classList.add('show')
-    bodyLock(unlock, false, delay);
+    bodyLock(unlock, [header, btnScroll], delay);
     document.documentElement.classList.add("_popup-open");
   } else {
     console.log(`[popupBlock]:  Нет модального окна на странице: ${targetBlock}`);
@@ -171,14 +175,37 @@ function removeActiveClasses(array, className) {
     array[i].classList.remove(className);
   }
 }
+
+
+
+/*==========================================================================================================================================================================*/
+/* Проверка URL-адресов */
+let URL = document.location.href;
+if (URL.includes("prices")) {
+    header.classList.add("header-prices");
+} else if (URL.includes("gallery")) {
+    header.classList.add("header-gallery");
+} else if (URL.includes("info")) {
+    header.classList.add("header-info");
+} else if (URL.includes("articles") || URL.includes("article")) {
+    header.classList.add("header-articles");
+} else if (URL.includes("contacts")) {
+    header.classList.add("header-contacts");
+};
+
+
 /*==========================================================================================================================================================================*/
 /* Скрытие, блокировка и разблокировка скролла */
 function bodyLock(unlock, lockPadding, delay = 500) {
   const lockPaddingValue = window.innerWidth - document.querySelector(".page").offsetWidth + "px";
-  if (lockPadding.length > 0) {
+  if (lockPadding) {
     for (let index = 0; index < lockPadding.length; index++) {
       const elem = lockPadding[index];
-      elem.style.paddingRight = lockPaddingValue;
+      if (elem.classList.contains("btn-scroll")) {
+        elem.style.marginRight = lockPaddingValue;
+      } else {
+          elem.style.paddingRight = lockPaddingValue;
+      }
     }
   }
   document.body.style.paddingRight = lockPaddingValue;
@@ -195,7 +222,11 @@ function bodyUnLock(unlock, lockPadding, delay = 500) {
     if (lockPadding.length > 0) {
       for (let index = 0; index < lockPadding.length; index++) {
         const elem = lockPadding[index];
-        elem.style.paddingRight = "0px";
+        if (elem.classList.contains("btn-scroll")) {
+            elem.style.marginRight = "0px";
+        } else {
+            elem.style.paddingRight = "0px";
+        }
       }
     }
     document.body.style.paddingRight = "0px";
@@ -207,6 +238,9 @@ function bodyUnLock(unlock, lockPadding, delay = 500) {
   }, delay);
 }
 
+
+/*==========================================================================================================================================================================*/
+/* Swiper */
 // Slider. Специалисты:
 if (document.querySelector(".expert-slider")) {
   new Swiper(".expert-slider", {
@@ -285,6 +319,31 @@ if (document.querySelector("._slider-text")) {
     },
   });
 }
+
+
+/*==========================================================================================================================================================================*/
+/* Gallery Images */
+window.addEventListener("DOMContentLoaded", function () {
+	const options = {
+		root: null,
+		rootMargin: "-15%",
+	}
+
+
+	const observer = new IntersectionObserver((entries, observer) => {
+		entries.forEach(entry => {
+			if (entry.isIntersecting) {
+                entry.target.classList.add("_show");
+			} else {
+                entry.target.classList.remove("_show");
+            }
+		})
+	}, options);
+	document.querySelectorAll(".tabs-gallery__image").forEach(item => {
+		observer.observe(item);
+	})
+})
+
 
 
 /*==========================================================================================================================================================================*/

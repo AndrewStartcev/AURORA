@@ -13,6 +13,18 @@ html {
 	box-sizing: border-box;
 }
 
+html,
+body {
+    height: 100%;
+    width: 100%;
+    font-size: 100%;
+    -ms-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 img {
 	max-width: 100%;
 	height: auto;
@@ -31,12 +43,14 @@ button {
 	border: none;
 }
 
+html,
 body {
 	margin: 0;
 	font-family: 'Oswald', sans-serif;
 	font-size: 16px;
 	background: #55abca;
 }
+
 section {
 	padding: 100px 0;
 	@include media-tablet {
@@ -87,12 +101,14 @@ input[type='submit'] {
 		font-size: 16px;
 	}
 }
-
 .page {
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
-	overflow-x: hidden;
+    background-color: #D0E7F3;
+}
+.page-main {
+    background-color: #55abca;
 }
 ._lock {
 	overflow: hidden;

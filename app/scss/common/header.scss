@@ -1,19 +1,28 @@
+.page-main .header {
+    background-color: transparent;
+    &._fixed {
+        background: #55abca;
+	}
+}
+
 .header {
 	position: fixed;
-	padding: 30px 0;
 	top: 0;
 	left: 0;
 	width: 100%;
 	z-index: 9999;
 	color: #ffffff;
+    background-color: #55abca;
+    padding: 30px 0;
 	border-bottom: 1px solid #5cbee1;
-	transition: all 0.5s ease;
-
+    transition: background-color 0.5s ease, padding-top 0.5s ease, padding-bottom 0.5s ease;
 	&._fixed {
 		padding: 10px 0;
-		background: #55abca;
 		.header-tel {
-			top: calc(100% - 10px);
+			top: calc(100% - 8px);
+            span {
+                font-size: 18px;
+            }
 		}
 	}
 	.container {
@@ -24,14 +33,6 @@
 		flex-wrap: wrap;
 		gap: 30px;
 	}
-}
-
-.page-gallery .header,
-.page-prices .header,
-.page-info .header,
-.page-articles .header,
-.page-article .header {
-    background-color: #55abca;
 }
 
 .header-logo {
@@ -53,7 +54,7 @@
 .header-tel {
 	position: absolute;
 	right: 0;
-	top: calc(100% + 15px);
+	top: calc(100% + 9px);
 	display: block;
 	padding: 6px 20px;
 	background: #0d4862;
@@ -65,6 +66,11 @@
 	transition: all 0.5s ease;
 	span {
 		flex: 0 0 auto;
+        font-size: 21px;
+        line-height: 1.5;
+        color: #FFFFFF;
+        will-change: font-size;
+        transition: font-size 0.5s ease;
 	}
 	&::before {
 		content: '';
@@ -123,24 +129,23 @@
     width: 33px;
 }
 
-.page-gallery .header-menu__item[data-menu=gallery]::after {
+.header-prices .header-menu__item[data-menu=prices]::after {
     width: 33px;
 }
 
-.page-prices .header-menu__item[data-menu=prices]::after {
+.header-gallery .header-menu__item[data-menu=gallery]::after {
     width: 33px;
 }
 
-.page-info .header-menu__item[data-menu=info]::after {
+.header-info .header-menu__item[data-menu=info]::after {
     width: 33px;
 }
 
-.page-contacts .header-menu__item[data-menu=contacts]::after {
+.header-articles .header-menu__item[data-menu=articles]::after {
     width: 33px;
 }
 
-.page-articles .header-menu__item[data-menu=articles]::after,
-.page-article .header-menu__item[data-menu=articles]::after {
+.header-contacts .header-menu__item[data-menu=contacts]::after {
     width: 33px;
 }
 
@@ -148,18 +153,29 @@
 	.header {
 		padding: 20px 0;
 		background: #55abca;
+        &._fixed {
+            .header-tel {
+                top: calc(100% - 8px);
+                span {
+                    font-size: 16px;
+                }
+            }
+        }
 	}
 	.header-tel {
 		width: auto;
 		display: flex;
 		justify-content: center;
 		flex: 0 0 auto;
-		top: calc(100% + 5px);
+		top: calc(100% + 3px);
 		position: absolute;
 		left: 50%;
 		right: auto;
 		margin: 0 auto;
 		transform: translateX(-50%);
+        span {
+            font-size: 16px;
+        }
 	}
 	.header-burger {
 		flex: 0 0 auto;
