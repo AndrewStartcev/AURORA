@@ -4,8 +4,8 @@
 *,
 *::before,
 *::after {
-    margin: 0;
-    padding: 0;
+	margin: 0;
+	padding: 0;
 	box-sizing: inherit;
 }
 
@@ -15,14 +15,14 @@ html {
 
 html,
 body {
-    height: 100%;
-    width: 100%;
-    font-size: 100%;
-    -ms-text-size-adjust: 100%;
-    -moz-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+	height: 100%;
+	width: 100%;
+	font-size: 100%;
+	-ms-text-size-adjust: 100%;
+	-moz-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 img {
@@ -59,7 +59,7 @@ section {
 }
 
 ul li {
-    list-style: none;
+	list-style: none;
 }
 
 form {
@@ -105,10 +105,11 @@ input[type='submit'] {
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
-    background-color: #D0E7F3;
+	background-color: #d0e7f3;
 }
 .page-main {
-    background-color: #55abca;
+	background-color: #55abca;
+	overflow: hidden;
 }
 ._lock {
 	overflow: hidden;
@@ -135,20 +136,20 @@ input[type='submit'] {
 }
 
 ._title {
-    display: block;
-    margin: 0px 0px 40px 0px;
-    font-weight: 600;
-    font-size: 48px;
-    line-height: 1.48;
-    text-transform: uppercase;
-    color: #0D4862;
-    @include media-tablet-horizontal {
-        margin: 0px 0px 20px 0px;
-    }
-    @include media-mobile-horizontal {
-        font-size: 38px;
-    }
-    @include media-mobile {
-        font-size: 30px;
-    }
+	display: block;
+	margin: 0px 0px 40px 0px;
+	font-weight: 600;
+	font-size: 48px;
+	line-height: 1.48;
+	text-transform: uppercase;
+	color: #0d4862;
+	@include media-tablet-horizontal {
+		margin: 0px 0px 20px 0px;
+	}
+	@include media-mobile-horizontal {
+		font-size: 38px;
+	}
+	@include media-mobile {
+		font-size: 30px;
+	}
 }

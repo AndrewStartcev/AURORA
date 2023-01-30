@@ -35,7 +35,7 @@ const header = document.querySelector(".header");
 const btnScroll = document.querySelector('.btn-scroll');
 let scrollPrev = 0;
 if (window.scrollY > 50) {
-    header.classList.add('_fixed');
+  header.classList.add('_fixed');
 } else {
   header.classList.remove('_fixed');
 }
@@ -180,18 +180,18 @@ function removeActiveClasses(array, className) {
 
 /*==========================================================================================================================================================================*/
 /* Проверка URL-адресов */
-let URL = document.location.href;
-if (URL.includes("prices")) {
-    header.classList.add("header-prices");
-} else if (URL.includes("gallery")) {
-    header.classList.add("header-gallery");
-} else if (URL.includes("info")) {
-    header.classList.add("header-info");
-} else if (URL.includes("articles") || URL.includes("article")) {
-    header.classList.add("header-articles");
-} else if (URL.includes("contacts")) {
-    header.classList.add("header-contacts");
-};
+// let URL = document.location.href;
+// if (URL.includes("prices")) {
+//     header.classList.add("header-prices");
+// } else if (URL.includes("gallery")) {
+//     header.classList.add("header-gallery");
+// } else if (URL.includes("info")) {
+//     header.classList.add("header-info");
+// } else if (URL.includes("articles") || URL.includes("article")) {
+//     header.classList.add("header-articles");
+// } else if (URL.includes("contacts")) {
+//     header.classList.add("header-contacts");
+// };
 
 
 /*==========================================================================================================================================================================*/
@@ -204,7 +204,7 @@ function bodyLock(unlock, lockPadding, delay = 500) {
       if (elem.classList.contains("btn-scroll")) {
         elem.style.marginRight = lockPaddingValue;
       } else {
-          elem.style.paddingRight = lockPaddingValue;
+        elem.style.paddingRight = lockPaddingValue;
       }
     }
   }
@@ -223,9 +223,9 @@ function bodyUnLock(unlock, lockPadding, delay = 500) {
       for (let index = 0; index < lockPadding.length; index++) {
         const elem = lockPadding[index];
         if (elem.classList.contains("btn-scroll")) {
-            elem.style.marginRight = "0px";
+          elem.style.marginRight = "0px";
         } else {
-            elem.style.paddingRight = "0px";
+          elem.style.paddingRight = "0px";
         }
       }
     }
@@ -324,24 +324,24 @@ if (document.querySelector("._slider-text")) {
 /*==========================================================================================================================================================================*/
 /* Gallery Images */
 window.addEventListener("DOMContentLoaded", function () {
-	const options = {
-		root: null,
-		rootMargin: "-15%",
-	}
+  const options = {
+    root: null,
+    rootMargin: "-15%",
+  }
 
 
-	const observer = new IntersectionObserver((entries, observer) => {
-		entries.forEach(entry => {
-			if (entry.isIntersecting) {
-                entry.target.classList.add("_show");
-			} else {
-                entry.target.classList.remove("_show");
-            }
-		})
-	}, options);
-	document.querySelectorAll(".tabs-gallery__image").forEach(item => {
-		observer.observe(item);
-	})
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("_show");
+      } else {
+        entry.target.classList.remove("_show");
+      }
+    })
+  }, options);
+  document.querySelectorAll(".tabs-gallery__image").forEach(item => {
+    observer.observe(item);
+  })
 })
 
 
@@ -349,169 +349,169 @@ window.addEventListener("DOMContentLoaded", function () {
 /*==========================================================================================================================================================================*/
 /* Табы */
 function tabs() {
-    const tabs = document.querySelectorAll('[data-tabs]');
-    let tabsActiveHash = [];
+  const tabs = document.querySelectorAll('[data-tabs]');
+  let tabsActiveHash = [];
 
 
-    if (tabs.length > 0) {
-        const hash = location.hash.replace('#', '');
-        if (hash.startsWith('tab-')) {
-            tabsActiveHash = hash.replace('tab-', '').split('-');
-        }
-        tabs.forEach((tabsBlock, index) => {
-            tabsBlock.classList.add('_tab-init');
-            tabsBlock.setAttribute('data-tabs-index', index);
-            tabsBlock.addEventListener("click", setTabsAction);
-            initTabs(tabsBlock);
-        })
-
-
-        // Получение табов с медиа запросами:
-        const tabsMedia = Array.from(tabs).filter(function (item, index, self) {
-            return item.dataset.tabs;
-        });
-        // Инициализация табов с медиа запросами:
-        if (tabsMedia.length > 0) {
-            initMediaTabs(tabsMedia);
-        }
+  if (tabs.length > 0) {
+    const hash = location.hash.replace('#', '');
+    if (hash.startsWith('tab-')) {
+      tabsActiveHash = hash.replace('tab-', '').split('-');
     }
+    tabs.forEach((tabsBlock, index) => {
+      tabsBlock.classList.add('_tab-init');
+      tabsBlock.setAttribute('data-tabs-index', index);
+      tabsBlock.addEventListener("click", setTabsAction);
+      initTabs(tabsBlock);
+    })
 
 
+    // Получение табов с медиа запросами:
+    const tabsMedia = Array.from(tabs).filter(function (item, index, self) {
+      return item.dataset.tabs;
+    });
     // Инициализация табов с медиа запросами:
-    function initMediaTabs(tabsMedia) {
-        const breakpointsArray = [];
-        tabsMedia.forEach(item => {
-            const breakpointValue = item.dataset.tabs;
-            const tabsBreakpointsObject = {};
-            tabsBreakpointsObject.value = breakpointValue;
-            tabsBreakpointsObject.item = item;
-            breakpointsArray.push(tabsBreakpointsObject);
-        });
-
-
-        // Получаем уникальные брейкпоинты:
-        let mediaQueries = breakpointsArray.map(function (item) {
-            return `(max-width:${item.value}px),${item.value}`;
-        });
-        mediaQueries = mediaQueries.filter(function (item, index, self) {
-            return self.indexOf(item) === index;
-        });
-
-
-        // Работаем с каждым брейкпоинтом:
-        mediaQueries.forEach(breakpoint => {
-            const paramsArray = breakpoint.split(",");
-            const matchMedia = window.matchMedia(paramsArray[0]);
-            const mediaBreakpoint = paramsArray[1];
-            // Объекты с нужными условиями:
-            const tabsMediaArray = breakpointsArray.filter(function (item) {
-                if (item.value === mediaBreakpoint) {
-                    return true;
-                }
-            })
-
-
-            // Событие:
-            matchMedia.addEventListener("change", function () {
-                setTitlePosition(tabsMediaArray, matchMedia);
-            });
-            setTitlePosition(tabsMediaArray, matchMedia);
-        });
+    if (tabsMedia.length > 0) {
+      initMediaTabs(tabsMedia);
     }
+  }
 
 
-    // Установка позиций заголовков:
-    function setTitlePosition(tabsMediaArray, matchMedia) {
-        tabsMediaArray.forEach(tabsMediaItem => {
-            tabsMediaItem = tabsMediaItem.item;
-            const tabsTitles = tabsMediaItem.querySelector('[data-tabs-titles]');
-            const tabsTitleItems = tabsMediaItem.querySelectorAll('[data-tabs-title]');
-            const tabsContent = tabsMediaItem.querySelector('[data-tabs-body]');
-            const tabsContentItems = tabsMediaItem.querySelectorAll('[data-tabs-item]');
-            tabsContentItems.forEach((tabsContentItem, index) => {
-                if (matchMedia.matches) {
-                    tabsContent.append(tabsTitleItems[index]);
-                    tabsContent.append(tabsContentItem);
-                    tabsMediaItem.classList.add('_tab-spoller');
-                } else {
-                    tabsTitles.append(tabsTitleItems[index]);
-                    tabsMediaItem.classList.remove('_tab-spoller');
-                }
-            });
-        });
+  // Инициализация табов с медиа запросами:
+  function initMediaTabs(tabsMedia) {
+    const breakpointsArray = [];
+    tabsMedia.forEach(item => {
+      const breakpointValue = item.dataset.tabs;
+      const tabsBreakpointsObject = {};
+      tabsBreakpointsObject.value = breakpointValue;
+      tabsBreakpointsObject.item = item;
+      breakpointsArray.push(tabsBreakpointsObject);
+    });
+
+
+    // Получаем уникальные брейкпоинты:
+    let mediaQueries = breakpointsArray.map(function (item) {
+      return `(max-width:${item.value}px),${item.value}`;
+    });
+    mediaQueries = mediaQueries.filter(function (item, index, self) {
+      return self.indexOf(item) === index;
+    });
+
+
+    // Работаем с каждым брейкпоинтом:
+    mediaQueries.forEach(breakpoint => {
+      const paramsArray = breakpoint.split(",");
+      const matchMedia = window.matchMedia(paramsArray[0]);
+      const mediaBreakpoint = paramsArray[1];
+      // Объекты с нужными условиями:
+      const tabsMediaArray = breakpointsArray.filter(function (item) {
+        if (item.value === mediaBreakpoint) {
+          return true;
+        }
+      })
+
+
+      // Событие:
+      matchMedia.addEventListener("change", function () {
+        setTitlePosition(tabsMediaArray, matchMedia);
+      });
+      setTitlePosition(tabsMediaArray, matchMedia);
+    });
+  }
+
+
+  // Установка позиций заголовков:
+  function setTitlePosition(tabsMediaArray, matchMedia) {
+    tabsMediaArray.forEach(tabsMediaItem => {
+      tabsMediaItem = tabsMediaItem.item;
+      const tabsTitles = tabsMediaItem.querySelector('[data-tabs-titles]');
+      const tabsTitleItems = tabsMediaItem.querySelectorAll('[data-tabs-title]');
+      const tabsContent = tabsMediaItem.querySelector('[data-tabs-body]');
+      const tabsContentItems = tabsMediaItem.querySelectorAll('[data-tabs-item]');
+      tabsContentItems.forEach((tabsContentItem, index) => {
+        if (matchMedia.matches) {
+          tabsContent.append(tabsTitleItems[index]);
+          tabsContent.append(tabsContentItem);
+          tabsMediaItem.classList.add('_tab-spoller');
+        } else {
+          tabsTitles.append(tabsTitleItems[index]);
+          tabsMediaItem.classList.remove('_tab-spoller');
+        }
+      });
+    });
+  }
+
+
+  // Работа с контентом:
+  function initTabs(tabsBlock) {
+    const tabsTitles = tabsBlock.querySelectorAll('[data-tabs-titles]>*');
+    const tabsContent = tabsBlock.querySelectorAll('[data-tabs-body]>*');
+    const tabsBlockIndex = tabsBlock.dataset.tabsIndex;
+    const tabsActiveHashBlock = tabsActiveHash[0] == tabsBlockIndex;
+    if (tabsActiveHashBlock) {
+      const tabsActiveTitle = tabsBlock.querySelector('[data-tabs-titles]>._tab-active');
+      tabsActiveTitle.classList.remove('_tab-active');
     }
-
-
-    // Работа с контентом:
-    function initTabs(tabsBlock) {
-        const tabsTitles = tabsBlock.querySelectorAll('[data-tabs-titles]>*');
-        const tabsContent = tabsBlock.querySelectorAll('[data-tabs-body]>*');
-        const tabsBlockIndex = tabsBlock.dataset.tabsIndex;
-        const tabsActiveHashBlock = tabsActiveHash[0] == tabsBlockIndex;
-        if (tabsActiveHashBlock) {
-            const tabsActiveTitle = tabsBlock.querySelector('[data-tabs-titles]>._tab-active');
-            tabsActiveTitle.classList.remove('_tab-active');
+    if (tabsContent.length > 0) {
+      tabsContent.forEach((tabsContentItem, index) => {
+        tabsTitles[index].setAttribute('data-tabs-title', '');
+        tabsContentItem.setAttribute('data-tabs-item', '');
+        if (tabsActiveHashBlock && index == tabsActiveHash[1]) {
+          tabsTitles[index].classList.add('_tab-active');
         }
-        if (tabsContent.length > 0) {
-            tabsContent.forEach((tabsContentItem, index) => {
-                tabsTitles[index].setAttribute('data-tabs-title', '');
-                tabsContentItem.setAttribute('data-tabs-item', '');
-                if (tabsActiveHashBlock && index == tabsActiveHash[1]) {
-                    tabsTitles[index].classList.add('_tab-active');
-                }
-                tabsContentItem.hidden = !tabsTitles[index].classList.contains('_tab-active');
-            });
-        }
+        tabsContentItem.hidden = !tabsTitles[index].classList.contains('_tab-active');
+      });
     }
+  }
 
 
-    function setTabsStatus(tabsBlock) {
-        const tabsTitles = tabsBlock.querySelectorAll('[data-tabs-title]');
-        const tabsContent = tabsBlock.querySelectorAll('[data-tabs-item]');
-        const tabsBlockIndex = tabsBlock.dataset.tabsIndex;
-        function isTabsAnamate(tabsBlock) {
-            if (tabsBlock.hasAttribute('data-tabs-animate')) {
-                return tabsBlock.dataset.tabsAnimate > 0 ? tabsBlock.dataset.tabsAnimate : 500;
-            }
-        }
-        const tabsBlockAnimate = isTabsAnamate(tabsBlock);
-        if (tabsContent.length > 0) {
-            tabsContent.forEach((tabsContentItem, index) => {
-                if (tabsTitles[index].classList.contains('_tab-active')) {
-                    if (tabsBlockAnimate) {
-                        _slideDown(tabsContentItem, tabsBlockAnimate);
-                    } else {
-                        tabsContentItem.hidden = false;
-                    }
-                    location.hash = `tab-${tabsBlockIndex}-${index}`;
-                } else {
-                    if (tabsBlockAnimate) {
-                        _slideUp(tabsContentItem, tabsBlockAnimate);
-                    } else {
-                        tabsContentItem.hidden = true;
-                    }
-                }
-            });
-        }
+  function setTabsStatus(tabsBlock) {
+    const tabsTitles = tabsBlock.querySelectorAll('[data-tabs-title]');
+    const tabsContent = tabsBlock.querySelectorAll('[data-tabs-item]');
+    const tabsBlockIndex = tabsBlock.dataset.tabsIndex;
+    function isTabsAnamate(tabsBlock) {
+      if (tabsBlock.hasAttribute('data-tabs-animate')) {
+        return tabsBlock.dataset.tabsAnimate > 0 ? tabsBlock.dataset.tabsAnimate : 500;
+      }
     }
-
-
-    function setTabsAction(e) {
-        const el = e.target;
-        if (el.closest('[data-tabs-title]')) {
-            const tabTitle = el.closest('[data-tabs-title]');
-            const tabsBlock = tabTitle.closest('[data-tabs]');
-            if (!tabTitle.classList.contains('_tab-active') && !tabsBlock.querySelectorAll('._slide').length) {
-                const tabActiveTitle = tabsBlock.querySelector('[data-tabs-title]._tab-active');
-                if (tabActiveTitle) {
-                    tabActiveTitle.classList.remove('_tab-active');
-                }
-                tabTitle.classList.add('_tab-active');
-                setTabsStatus(tabsBlock);
-            }
-            e.preventDefault();
+    const tabsBlockAnimate = isTabsAnamate(tabsBlock);
+    if (tabsContent.length > 0) {
+      tabsContent.forEach((tabsContentItem, index) => {
+        if (tabsTitles[index].classList.contains('_tab-active')) {
+          if (tabsBlockAnimate) {
+            _slideDown(tabsContentItem, tabsBlockAnimate);
+          } else {
+            tabsContentItem.hidden = false;
+          }
+          location.hash = `tab-${tabsBlockIndex}-${index}`;
+        } else {
+          if (tabsBlockAnimate) {
+            _slideUp(tabsContentItem, tabsBlockAnimate);
+          } else {
+            tabsContentItem.hidden = true;
+          }
         }
+      });
     }
+  }
+
+
+  function setTabsAction(e) {
+    const el = e.target;
+    if (el.closest('[data-tabs-title]')) {
+      const tabTitle = el.closest('[data-tabs-title]');
+      const tabsBlock = tabTitle.closest('[data-tabs]');
+      if (!tabTitle.classList.contains('_tab-active') && !tabsBlock.querySelectorAll('._slide').length) {
+        const tabActiveTitle = tabsBlock.querySelector('[data-tabs-title]._tab-active');
+        if (tabActiveTitle) {
+          tabActiveTitle.classList.remove('_tab-active');
+        }
+        tabTitle.classList.add('_tab-active');
+        setTabsStatus(tabsBlock);
+      }
+      e.preventDefault();
+    }
+  }
 }
 tabs();
 
@@ -574,7 +574,7 @@ async function formSend(e) {
   if (error === 0) {
     inputRemoveError();
     document.querySelector('.req-form').classList.remove('_error')
-    let response = await fetch("form.php", {
+    let response = await fetch("api/v1/appeals/", {
       method: "POST",
       body: formData
     });
