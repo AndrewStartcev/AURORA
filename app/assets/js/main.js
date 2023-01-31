@@ -572,7 +572,6 @@ async function formSend(e) {
   let error = formValidate(form);
   let formData = new FormData(form);
   if (error === 0) {
-    inputRemoveError();
     document.querySelector('.req-form').classList.remove('_error')
     let response = await fetch("api/v1/appeals/", {
       method: "POST",
@@ -583,11 +582,7 @@ async function formSend(e) {
       alert(result.message);
       formPreview.innerHTML = "";
       form.reset();
-      // document.querySelector(".popup-message").classList.add("_show");
-      // let buttonPopup = document.querySelector(".popup-message__button");
-      // buttonPopup.addEventListener("click", function (e) {
-      //   this.closest(".popup-message").classList.remove("_show");
-      // });
+      document.querySelector(".successForm").classList.add("_show");
     } else {
       if (form.classList.contains("form__body")) {
         document.querySelector(".input").classList.remove("_error");
