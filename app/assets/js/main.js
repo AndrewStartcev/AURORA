@@ -604,7 +604,6 @@ function formValidate(form) {
     const input = formReq[index];
     formRemoveError(input);
     if (input.classList.contains("_tel")) {
-      console.log(input.value.length);
       if (input.value.length !== 17) {
         formAddError(input);
         error++;
