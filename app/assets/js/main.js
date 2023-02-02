@@ -582,7 +582,8 @@ async function formSend(e) {
       alert(result.message);
       formPreview.innerHTML = "";
       form.reset();
-      document.querySelector(".successForm").classList.add("_show");
+      document.querySelector("#mainForm").classList.remove("show");
+      document.querySelector("#successForm").classList.add("show");
     } else {
       if (form.classList.contains("form__body")) {
         document.querySelector(".input").classList.remove("_error");
