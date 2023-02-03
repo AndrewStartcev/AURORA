@@ -573,13 +573,11 @@ async function formSend(e) {
   let formData = new FormData(form);
   if (error === 0) {
     document.querySelector('.req-form').classList.remove('_error')
-    let response = await fetch("api/v1/appeals/", {
+    let response = await fetch("/api/v1/appeals/", {
       method: "POST",
       body: formData
     });
     if (response.ok) {
-      let result = await response.json();
-      alert(result.message);
       formPreview.innerHTML = "";
       form.reset();
       document.querySelector("#mainForm").classList.remove("show");
