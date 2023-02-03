@@ -578,7 +578,6 @@ async function formSend(e) {
       body: formData
     });
     if (response.ok) {
-      formPreview.innerHTML = "";
       form.reset();
       document.querySelector("#mainForm").classList.remove("show");
       document.querySelector("#successForm").classList.add("show");
